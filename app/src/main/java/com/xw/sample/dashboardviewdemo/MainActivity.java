@@ -27,13 +27,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mDashboardView1 = (DashboardView1) findViewById(R.id.dashboard_view_1);
-        mDashboardView2 = (DashboardView2) findViewById(R.id.dashboard_view_2);
-        mDashboardView3 = (DashboardView3) findViewById(R.id.dashboard_view_3);
-        mDashboardView4 = (DashboardView4) findViewById(R.id.dashboard_view_4);
+        mDashboardView1 = findViewById(R.id.dashboard_view_1);
+        mDashboardView2 = findViewById(R.id.dashboard_view_2);
+        mDashboardView3 = findViewById(R.id.dashboard_view_3);
+        mDashboardView4 = findViewById(R.id.dashboard_view_4);
 
         mDashboardView1.setOnClickListener(this);
         mDashboardView2.setOnClickListener(this);
@@ -79,12 +79,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             isAnimFinished = true;
                         }
                     });
-                    animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                        @Override
-                        public void onAnimationUpdate(ValueAnimator animation) {
-                            int value = (int) animation.getAnimatedValue();
-                            mDashboardView4.setVelocity(value);
-                        }
+                    animator.addUpdateListener(animation -> {
+                        int value = (int) animation.getAnimatedValue();
+                        mDashboardView4.setVelocity(value);
                     });
                     animator.start();
                 }
